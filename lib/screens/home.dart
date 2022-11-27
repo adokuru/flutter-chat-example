@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_socket_io/model/message.dart';
 import 'package:flutter_socket_io/providers/home.dart';
