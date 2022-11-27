@@ -2,7 +2,7 @@ class Message {
   final String message;
   final String chatID;
   final String senderUsername;
-  final DateTime sentAt;
+  final String sentAt;
 
   Message({
     required this.message,
@@ -14,9 +14,9 @@ class Message {
   factory Message.fromJson(Map<String, dynamic> message) {
     return Message(
       message: message['message'],
-      senderUsername: message['senderUsername'],
+      senderUsername: message['sender'],
       chatID: message['chatID'],
-      sentAt: DateTime.fromMillisecondsSinceEpoch(message['sentAt']),
+      sentAt: message['sentAt'],
     );
   }
 }

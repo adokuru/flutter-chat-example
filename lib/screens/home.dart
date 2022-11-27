@@ -23,15 +23,16 @@ class _HomeScreenState extends State<HomeScreen> {
   _sendMessage() {
     _socket.emit('message', {
       'message': _messageInputController.text.trim(),
-      'chatId': chatID,
+      'chatID': chatID,
       'sender': widget.username,
+      'sentAt': "1 mintue ago",
     });
     _messageInputController.clear();
     Provider.of<HomeProvider>(context, listen: false).addNewMessage(Message(
-      message: _messageInputController.text,
+      message: _messageInputController.text.trim(),
       chatID: chatID,
       senderUsername: widget.username,
-      sentAt: DateTime.now(),
+      sentAt: "1 mintue ago",
     ));
   }
 
@@ -112,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Text(message.message),
                               Text(
-                                DateFormat('hh:mm a').format(message.sentAt),
+                                message.sentAt,
                                 style: Theme.of(context).textTheme.caption,
                               ),
                             ],
