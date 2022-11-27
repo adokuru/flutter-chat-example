@@ -18,16 +18,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late IO.Socket _socket;
   final TextEditingController _messageInputController = TextEditingController();
+  final chatID = 'chat';
 
   _sendMessage() {
     _socket.emit('message', {
       'message': _messageInputController.text.trim(),
-      'sender': widget.username
+      'chatId': chatID,
+      'sender': widget.username,
     });
     _messageInputController.clear();
   }
-
-  final chatID = 'chat';
 
   _connectSocket() {
     // Connect to socket
