@@ -28,10 +28,18 @@ class _HomeScreenState extends State<HomeScreen> {
   final chatID = 'chat';
 
   _connectSocket() {
+    // Connect to socket
     _socket.onConnect((data) =>
         {print('Connected to socket'), _socket.emit('signIn', chatID)});
+
+    // Errors
     _socket.onConnectError((data) => print('Connect Error: $data'));
-    _socket.onDisconnect((data) => print('Socket.IO server disconnected'));
+
+    // Disconnect
+    _socket.onDisconnect((data) => {
+          print('Socket.IO server disconnected'),
+          _socket.emit('signOut', chatID)
+        });
     _socket.on(
       'message',
       (data) => Provider.of<HomeProvider>(context, listen: false).addNewMessage(
