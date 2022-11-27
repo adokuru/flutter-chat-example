@@ -27,6 +27,12 @@ class _HomeScreenState extends State<HomeScreen> {
       'sender': widget.username,
     });
     _messageInputController.clear();
+    Provider.of<HomeProvider>(context, listen: false).addNewMessage(Message(
+      message: _messageInputController.text,
+      chatID: chatID,
+      senderUsername: widget.username,
+      sentAt: DateTime.now(),
+    ));
   }
 
   _connectSocket() {
@@ -45,9 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _socket.on(
       'message',
-      (data) => Provider.of<HomeProvider>(context, listen: false).addNewMessage(
-        Message.fromJson(data),
-      ),
+      (data) => {
+        print('Message received: $data'),
+        Provider.of<HomeProvider>(context, listen: false).addNewMessage(
+          Message.fromJson(data),
+        )
+      },
     );
   }
 
