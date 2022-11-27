@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           print('Socket.IO server disconnected'),
           _socket.emit('signOut', chatID)
         });
+
     _socket.on(
       'message',
       (data) => Provider.of<HomeProvider>(context, listen: false).addNewMessage(
