@@ -15,6 +15,7 @@ class Message {
     return Message(
       message: message['message'],
       senderUsername: message['senderUsername'],
+      chatID: message['chatID'],
       sentAt: DateTime.fromMillisecondsSinceEpoch(message['sentAt']),
     );
   }
